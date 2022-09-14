@@ -11,7 +11,10 @@ public:
 		root = new Node(data);
 	}
 	
-
+	void print()
+	{
+		_print(root);
+	}
 private:
 	class Node
 	{
@@ -23,12 +26,22 @@ private:
 	
 	};
 	Node* root;
+	void _print(Node* branch)
+	{
+		if (branch != nullptr)
+		{
+			
+			cout << branch->data << endl;
+			_print(branch->left);
+			_print(branch->right);
+		}
+	}
 
 };
 
 int main()
 {
-
+	BinarTree tree(4);
 
 	return 0;
 }
