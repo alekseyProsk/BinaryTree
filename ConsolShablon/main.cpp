@@ -15,14 +15,24 @@ public:
 	{
 		_print(root);
 	}
+
+	void insert(int data)
+	{
+		_insert(data, root);
+	}
+	~BinarTree()
+	{
+		_del(root);
+	}
 private:
 	class Node
 	{
 	public:
 		Node(int data) : data{ data }, left{ nullptr }, right{ nullptr }{}
+		int data;
 		Node* left;
 		Node* right;
-		int data;
+		
 	
 	};
 	Node* root;
@@ -37,11 +47,38 @@ private:
 		}
 	}
 
+	void _insert(int data, Node*& branch)
+	{
+		if (branch != nullptr)
+		{
+			if (data > branch->data)
+				_insert(data, branch->right);
+			else if (data < branch->data)
+				_insert(data, branch->left);
+		}
+		else
+			branch = new Node(data);
+	}
+	void _del(Node*& branch)
+	{
+		if (branch != nullptr)
+		{
+			_del(branch->left);
+			_del(branch->right);
+			delete branch;
+		}
+	}
+
 };
 
 int main()
 {
-	BinarTree tree(4);
+	BinarTree tree;
+
+	tree.insert(5);
+	tree.insert(4);
+	tree.insert(7);
+	tree.print();
 
 	return 0;
 }
